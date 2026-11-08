@@ -123,10 +123,10 @@ public class P25P2DecoderHDQPSK extends P25P2Decoder implements IdentifierUpdate
         mIBasebandFilter = FilterFactory.getRealFilter(filterTaps);
         mQBasebandFilter = FilterFactory.getRealFilter(filterTaps);
 
-        //Root-raised-cosine matched filter, alpha 0.2, 8 symbols each side.  Note: getRootRaisedCosine() halves its
+        //Root-raised-cosine matched filter, alpha 0.85, 8 symbols each side.  Note: getRootRaisedCosine() halves its
         //samples-per-symbol argument, so getRRC() passes twice the actual value to design the filter at the 6000 baud
         //symbol rate.
-        float[] matchedFilterTaps = FilterFactory.getRRC(getSampleRate() / getSymbolRate(), 16, 0.2f);
+        float[] matchedFilterTaps = FilterFactory.getRRC(getSampleRate() / getSymbolRate(), 16, 0.85f);
         mIMatchedFilter = FilterFactory.getRealFilter(matchedFilterTaps);
         mQMatchedFilter = FilterFactory.getRealFilter(matchedFilterTaps);
         mCostasLoop = new CostasLoop(getSampleRate(), getSymbolRate());
